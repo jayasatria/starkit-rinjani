@@ -25,10 +25,8 @@
                         <td><?php
                             if ($m['role_id'] == 1) {
                                 echo "Admin";
-                            } elseif ($m['role_id'] == 2) {
-                                echo  "User";
                             } else {
-                                echo "Rendal";
+                                echo  "User";
                             } ?>
                             <?php if ($m['role_id'] != 1) { ?>
                                 <br> <a href="" class="badge badge-warning" data-toggle="modal" data-target="#ModalRole<?= $m['id'] ?>">edit</a>
