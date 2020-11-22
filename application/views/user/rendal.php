@@ -25,7 +25,7 @@
                         <td><?= $p['nama_pekerjaan']; ?></td>
                         <td><?= $p['no_kontrak']; ?></td>
                         <td><?= $p['vendor']; ?></td>
-                        <td><a href="<?= base_url('admin/detail/') . $p['id']; ?>" class="badge badge-success">Detail</a></td>
+                        <td><a href="<?= base_url('user/detail/') . $p['id']; ?>" class="badge badge-success">Detail</a></td>
 
                     </tr>
                 <?php endforeach; ?>
