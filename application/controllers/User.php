@@ -107,4 +107,16 @@ class User extends CI_Controller
             }
         }
     }
-}
+    public function rendal()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Rendal';
+        $data['pekerjaan'] = $this->db->get('pekerjaan')->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('user/rendal', $data);
+        $this->load->view('template/footer', $data);
+    }
+}//End Controller
