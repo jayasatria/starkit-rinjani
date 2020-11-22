@@ -227,4 +227,38 @@ class Admin extends CI_Controller
         $this->load->view('admin/rendal', $data);
         $this->load->view('template/footer', $data);
     }
+    public function add_job()
+    {
+        $nama_pekerjaan = $this->input->post('nama_pekerjaan');
+        $vendor = $this->input->post('vendor');
+        $no_kontrak = $this->input->post('no_kontrak');
+        $password = rand();
+        $tgl_mulai = $this->input->post('tgl_mulai');
+        $tgl_selesai = $this->input->post('tgl_selesai');
+        if ($nama_pekerjaan == "") {
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['title'] = 'Add Job';
+
+            $this->load->view('template/header', $data);
+            $this->load->view('template/sidebar', $data);
+            $this->load->view('template/topbar', $data);
+            $this->load->view('admin/add_job', $data);
+            $this->load->view('template/footer', $data);
+        } else {
+            $ddata = [
+                'nama_pekerjaan' => $nama_pekerjaan,
+                'no_kontrak' => $no_kontrak,
+                'vendor' => $vendor,
+                'user_name' => $no_kontrak,
+                'password' => $password,
+                'tgl_mulai' => $tgl_mulai,
+                'tgl_selesai' => $tgl_selesai
+            ];
+            $this->db->insert('pekerjaan', $ddata);
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            data has been insert!!
+          </div>');
+            redirect('admin/rendal');
+        }
+    }
 }//end controller
