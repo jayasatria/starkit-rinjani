@@ -28,6 +28,6 @@
             <label for="deskripsi">Deskripsi</label>
             <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"><?= $pekerjaan['deskripsi']; ?></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
     </form>
 </div>
