@@ -217,9 +217,7 @@ class Admin extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Rendal';
-        // $this->load->model('Admin_model', 'admin');
-        // $data['member'] = $this->admin->user();
-        // $data['role'] = $this->admin->getRole();
+        $data['pekerjaan'] = $this->db->get('pekerjaan')->result_array();
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
