@@ -217,14 +217,25 @@ class Admin extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Rendal';
-        // $this->load->model('Admin_model', 'admin');
-        // $data['member'] = $this->admin->user();
-        // $data['role'] = $this->admin->getRole();
+        $data['pekerjaan'] = $this->db->get('pekerjaan')->result_array();
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
         $this->load->view('admin/rendal', $data);
+        $this->load->view('template/footer', $data);
+    }
+    public function detail($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Detail Pekerjaan';
+
+        $data['pekerjaan'] = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/detail', $data);
         $this->load->view('template/footer', $data);
     }
     public function add_job()
@@ -235,6 +246,7 @@ class Admin extends CI_Controller
         $password = rand();
         $tgl_mulai = $this->input->post('tgl_mulai');
         $tgl_selesai = $this->input->post('tgl_selesai');
+        $deskripsi = $this->input->post('deskripsi');
         if ($nama_pekerjaan == "") {
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'Add Job';
@@ -252,7 +264,8 @@ class Admin extends CI_Controller
                 'user_name' => $no_kontrak,
                 'password' => $password,
                 'tgl_mulai' => $tgl_mulai,
-                'tgl_selesai' => $tgl_selesai
+                'tgl_selesai' => $tgl_selesai,
+                'deskripsi' => $deskripsi
             ];
             $this->db->insert('pekerjaan', $ddata);
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -260,5 +273,18 @@ class Admin extends CI_Controller
           </div>');
             redirect('admin/rendal');
         }
+    }
+    public function editJob($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Edit Pekerjaan';
+
+        $data['pekerjaan'] = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/editJob', $data);
+        $this->load->view('template/footer', $data);
     }
 }//end controller

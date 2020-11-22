@@ -25,6 +25,10 @@
                 </div>
 
             </div>
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi Pekerjaan</label>
+                <textarea name="deskripsi" id="deskripsi" cols="30" class="form-control" rows="10"></textarea>
+            </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
