@@ -228,7 +228,7 @@ class Admin extends CI_Controller
     public function detail($id)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Ddetail Pekerjaan';
+        $data['title'] = 'Detail Pekerjaan';
 
         $data['pekerjaan'] = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
 
@@ -273,5 +273,18 @@ class Admin extends CI_Controller
           </div>');
             redirect('admin/rendal');
         }
+    }
+    public function editJob($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Edit Pekerjaan';
+
+        $data['pekerjaan'] = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/editJob', $data);
+        $this->load->view('template/footer', $data);
     }
 }//end controller

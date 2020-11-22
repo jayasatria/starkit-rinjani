@@ -2,7 +2,7 @@
     <div class="row">
 
         <h1>Detail Pekerjaan </h1>
-        <h6> <a href="<?= base_url('admin/editJob') . $pekerjaan['id']; ?>" class="badge badge-warning mt-3 ml-3">edit</a></h6>
+        <h6> <a href="<?= base_url('admin/editJob/') . $pekerjaan['id']; ?>" class="badge badge-warning mt-3 ml-3">edit</a></h6>
     </div>
 
     <?= $this->session->flashdata('message'); ?>
