@@ -287,4 +287,28 @@ class Admin extends CI_Controller
         $this->load->view('admin/editJob', $data);
         $this->load->view('template/footer', $data);
     }
+    public function editPekerjaan($id)
+    {
+        $nama_pekerjaan = $this->input->post('nama_pekerjaan');
+        $vendor = $this->input->post('vendor');
+        $no_kontrak = $this->input->post('no_kontrak');
+        $tgl_mulai = $this->input->post('tgl_mulai');
+        $tgl_selesai = $this->input->post('tgl_selesai');
+        $deskripsi = $this->input->post('deskripsi');
+        $data = [
+            'nama_pekerjaan' => $nama_pekerjaan,
+            'no_kontrak' => $no_kontrak,
+            'vendor' => $vendor,
+            'user_name' => $no_kontrak,
+            'tgl_mulai' => $tgl_mulai,
+            'tgl_selesai' => $tgl_selesai,
+            'deskripsi' => $deskripsi
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('pekerjaan', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            data has been updated!!
+          </div>');
+        redirect('admin/detail/' . $id);
+    }
 }//end controller
