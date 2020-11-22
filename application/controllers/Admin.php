@@ -246,6 +246,7 @@ class Admin extends CI_Controller
         $password = rand();
         $tgl_mulai = $this->input->post('tgl_mulai');
         $tgl_selesai = $this->input->post('tgl_selesai');
+        $deskripsi = $this->input->post('deskripsi');
         if ($nama_pekerjaan == "") {
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'Add Job';
@@ -263,7 +264,8 @@ class Admin extends CI_Controller
                 'user_name' => $no_kontrak,
                 'password' => $password,
                 'tgl_mulai' => $tgl_mulai,
-                'tgl_selesai' => $tgl_selesai
+                'tgl_selesai' => $tgl_selesai,
+                'deskripsi' => $deskripsi
             ];
             $this->db->insert('pekerjaan', $ddata);
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
