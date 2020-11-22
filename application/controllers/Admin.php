@@ -243,7 +243,7 @@ class Admin extends CI_Controller
         $nama_pekerjaan = $this->input->post('nama_pekerjaan');
         $vendor = $this->input->post('vendor');
         $no_kontrak = $this->input->post('no_kontrak');
-        $password = rand();
+        $password = rand(500000, 1000000);
         $tgl_mulai = $this->input->post('tgl_mulai');
         $tgl_selesai = $this->input->post('tgl_selesai');
         $deskripsi = $this->input->post('deskripsi');
@@ -268,7 +268,7 @@ class Admin extends CI_Controller
                 'deskripsi' => $deskripsi
             ];
             $this->db->insert('pekerjaan', $ddata);
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             data has been insert!!
           </div>');
             redirect('admin/rendal');
@@ -306,9 +306,18 @@ class Admin extends CI_Controller
         ];
         $this->db->where('id', $id);
         $this->db->update('pekerjaan', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             data has been updated!!
           </div>');
         redirect('admin/detail/' . $id);
+    }
+    public function deleteJob($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('pekerjaan');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            data has been deleted!!
+          </div>');
+        redirect('admin/rendal');
     }
 }//end controller

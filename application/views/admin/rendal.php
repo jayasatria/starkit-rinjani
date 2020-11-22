@@ -12,6 +12,7 @@
                     <th scope="col">Nomor Kontrak</th>
                     <th scope="col">Vendor</th>
                     <th scope="col">Detail</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,7 @@
                         <td><?= $p['no_kontrak']; ?></td>
                         <td><?= $p['vendor']; ?></td>
                         <td><a href="<?= base_url('admin/detail/') . $p['id']; ?>" class="badge badge-success">Detail</a></td>
+                        <td><a href="<?= base_url('admin/deleteJob/') . $p['id']; ?>"><i class="far fa-trash-alt"></i></a></td>
 
                         </td>
                     </tr>
