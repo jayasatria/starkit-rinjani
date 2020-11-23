@@ -275,7 +275,7 @@ class Admin extends CI_Controller
                 'email' => $email_vendor,
                 'image' => 'default.jpg',
                 'password' => $password_vendor,
-                'role_id' => 3,
+                'role_id' => 2,
                 'is_active' => 1,
                 'date_created' => time()
             ];
