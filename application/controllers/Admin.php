@@ -247,6 +247,8 @@ class Admin extends CI_Controller
         $tgl_mulai = $this->input->post('tgl_mulai');
         $tgl_selesai = $this->input->post('tgl_selesai');
         $deskripsi = $this->input->post('deskripsi');
+        $email_vendor = $this->input->post('email_vendor');
+        $password_vendor = password_hash($password, PASSWORD_DEFAULT);
         if ($nama_pekerjaan == "") {
             $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'Add Job';
@@ -261,12 +263,23 @@ class Admin extends CI_Controller
                 'nama_pekerjaan' => $nama_pekerjaan,
                 'no_kontrak' => $no_kontrak,
                 'vendor' => $vendor,
-                'user_name' => $no_kontrak,
+                'user_name' => $email_vendor,
                 'password' => $password,
                 'tgl_mulai' => $tgl_mulai,
                 'tgl_selesai' => $tgl_selesai,
                 'deskripsi' => $deskripsi
             ];
+
+            $data2 = [
+                'name' => $vendor,
+                'email' => $email_vendor,
+                'image' => 'default.jpg',
+                'password' => $password_vendor,
+                'role_id' => 3,
+                'is_active' => 1,
+                'date_created' => time()
+            ];
+            $this->db->insert('user', $data2);
             $this->db->insert('pekerjaan', $ddata);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             data has been insert!!
