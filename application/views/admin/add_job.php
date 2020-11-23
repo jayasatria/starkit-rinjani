@@ -14,6 +14,10 @@
                 <label for="vendor">Nama Vendor</label>
                 <input type="text" class="form-control" id="vendor" name="vendor" required>
             </div>
+            <div class="form-group">
+                <label for="email_vendor">Email Vendor</label>
+                <input type="email" class="form-control" name="email_vendor" id="email_vendor" aria-describedby="emailHelp">
+            </div>
             <div class="row">
                 <div class="form-group col-5">
                     <label for="tgl_mulai">Tanggal Mulai</label>
