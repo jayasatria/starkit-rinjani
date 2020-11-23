@@ -6,6 +6,7 @@
                 <label for="job_file"> Upload Job Description</label>
                 <input type="file" class="form-control-file" name="job_file" id="job_file">
             </div>
+            <button type="submit">Submit</button>
         </form>
     </div>
 </div>
