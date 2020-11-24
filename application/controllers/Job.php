@@ -42,7 +42,8 @@ class Job extends CI_Controller
     }
     public function insert_desk($id)
     {
-
+        // Mengambil data pekerjaan berdasarkan id
+        $pekerjaan = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
         $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
 
@@ -53,13 +54,32 @@ class Job extends CI_Controller
             } else {
                 $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
             }
+            $nama_file = str_replace(" ", "_", $pekerjaan['nama_pekerjaan']) . "_" . $id;
 
             $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
+            // Memanggil header tabel
+            $total = array_map("count", $sheetData);
 
+            $sql = "CREATE TABLE IF NOT EXISTS $nama_file (
+                id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                nama_toko varchar(255) NOT NULL,
+            )";
+
+
+
+            for ($j = 6; $j < $total['0']; $j++) {
+                $row1 = $sheetData['0'][$j];
+                # Create a new table
+                echo $row1;
+            }
+
+
+            die;
             for ($i = 0; $i < count($sheetData); $i++) {
-                $koloma1 = $sheetData['0'][$i];
-                echo $koloma1;
+
+
+
                 // $kolomb1 = $sheetData['0']['1'];
                 // $nama = $sheetData[$i]['1'];
                 // $kelas = $sheetData[$i]['2'];
