@@ -3,8 +3,8 @@
     <div class="row ml-2">
         <form action="<?= base_url('job/insert_desk/') . $pekerjaan['id']; ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="job_file"> Upload Job Description</label>
-                <input type="file" class="form-control-file" name="job_file" id="job_file">
+                <label for="upload_file"> Upload Job Description</label>
+                <input type="file" class="form-control-file" name="upload_file" id="upload_file">
             </div>
             <button type="submit">Submit</button>
         </form>
