@@ -44,8 +44,8 @@ class Job extends CI_Controller
     {
         // Mengambil data pekerjaan berdasarkan id
 
-        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         if (($_FILES['upload_file']['name']) != "") {
+            $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
 
                 $arr_file = explode('.', $_FILES['upload_file']['name']);
@@ -56,7 +56,8 @@ class Job extends CI_Controller
                     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
                 }
                 $pekerjaan = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
-                $nama_file = str_replace(" ", "_", $pekerjaan['nama_pekerjaan']) . "_" . $id;
+                // $nama_file = str_replace(" ", "_", $pekerjaan['nama_pekerjaan']) . "_" . $id;
+                $nama_file = "pekerjaan_" . $id;
                 $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
                 $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
@@ -355,6 +356,7 @@ class Job extends CI_Controller
                         'hari_89' => $hari_89,
                         'hari_90' => $hari_90
                     ];
+                    $this->db->update('pekerjaan', ['table_ready' => 1]);
                     $this->db->insert($nama_file, $data);
                 }
             }
