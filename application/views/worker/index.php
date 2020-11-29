@@ -10,7 +10,7 @@
         </div>
     <?php else : ?>
         <div class="row">
-            <a href="<?= base_url('job/desk/') . $pekerjaan['id']; ?>" class="btn btn-primary">Update Progress</a>
+            <a href="<?= base_url('job/progress/') . $pekerjaan['id']; ?>" class="btn btn-success">Update Progress</a>
         </div>
     <?php endif; ?>
     <?= $this->session->flashdata('message'); ?>
