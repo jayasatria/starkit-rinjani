@@ -275,7 +275,7 @@ class Admin extends CI_Controller
                 'email' => $email_vendor,
                 'image' => 'default.jpg',
                 'password' => $password_vendor,
-                'role_id' => 2,
+                'role_id' => 4,
                 'is_active' => 1,
                 'date_created' => time()
             ];
@@ -326,11 +326,24 @@ class Admin extends CI_Controller
     }
     public function deleteJob($id)
     {
+        $user = $this->db->get_where('pekerjaan', ['id' => $id])->row_array();
+        $this->db->delete('user', ['email' => $user['user_name']]);
         $this->db->where('id', $id);
         $this->db->delete('pekerjaan');
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             data has been deleted!!
           </div>');
         redirect('admin/rendal');
+    }
+    public function delete_user($id)
+    {
+        $user = $this->db->get_where('user', ['id' => $id])->row_array();
+        $this->db->delete('user', ['id' => $id]);
+        $data = $user['email'];
+        $this->db->delete('pekerjaan', ['user_name' => $data]);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            data has been deleted!!
+          </div>');
+        redirect('admin/user');
     }
 }//end controller

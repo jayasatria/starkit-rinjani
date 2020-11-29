@@ -4,10 +4,15 @@
 
         <h1>Detail Pekerjaan </h1>
     </div>
-    <div class="row">
-        <a href="<?= base_url('job/desk/') . $pekerjaan['id']; ?>" class="btn btn-primary">Buat List Pekerjaan</a>
-
-    </div>
+    <?php if ($pekerjaan['table_ready'] != 1) : ?>
+        <div class="row">
+            <a href="<?= base_url('job/desk/') . $pekerjaan['id']; ?>" class="btn btn-primary">Buat List Pekerjaan</a>
+        </div>
+    <?php else : ?>
+        <div class="row">
+            <a href="<?= base_url('job/desk/') . $pekerjaan['id']; ?>" class="btn btn-primary">Update Progress</a>
+        </div>
+    <?php endif; ?>
     <?= $this->session->flashdata('message'); ?>
 
     <table class="table mt-5">

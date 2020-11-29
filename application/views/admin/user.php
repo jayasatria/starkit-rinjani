@@ -11,6 +11,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +53,9 @@
                             <?php
 
                             } ?>
+                        </td>
+                        <td>
+                            <a href="<?= base_url('admin/delete_user/') . $m['id']; ?>"><i class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
