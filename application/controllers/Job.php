@@ -371,4 +371,17 @@ class Job extends CI_Controller
             redirect('job/desk/' . $id);
         }
     }
+    public function progress($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Update Progress';
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->db->where('user_name', $user['email']);
+        $data['pekerjaan'] = $this->db->get('pekerjaan')->row_array();
+        $this->load->view('template/header', $data);
+        // $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('worker/progress', $data);
+        $this->load->view('template/footer', $data);
+    }
 }//end controller
