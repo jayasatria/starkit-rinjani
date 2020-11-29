@@ -1,4 +1,5 @@
 <div class="container mb-5">
+    <?= $this->session->flashdata('message'); ?>
     <div class="row">
         <div class="col-lg-4">
             <div class="card text-center" style="width: 18rem; ">
