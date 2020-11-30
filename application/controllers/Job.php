@@ -374,15 +374,29 @@ class Job extends CI_Controller
     public function progress($id)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['title'] = 'Update Progress';
+        $data['title'] = 'WORK PLAN';
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->db->where('user_name', $user['email']);
         $data['pekerjaan'] = $this->db->get('pekerjaan')->row_array();
         $data['progress'] = $this->db->get('pekerjaan_' . $id)->result_array();
         $this->load->view('template/header', $data);
         // $this->load->view('template/sidebar', $data);
-        $this->load->view('template/topbar', $data);
+        $this->load->view('template/topbar_worker', $data);
         $this->load->view('worker/progress', $data);
+        $this->load->view('template/footer', $data);
+    }
+    public function update_progress($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'UPDATE PROGRESS';
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->db->where('user_name', $user['email']);
+        $data['pekerjaan'] = $this->db->get('pekerjaan')->row_array();
+        $data['progress'] = $this->db->get('pekerjaan_' . $id)->result_array();
+        $this->load->view('template/header', $data);
+        // $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar_worker', $data);
+        $this->load->view('worker/update_progress', $data);
         $this->load->view('template/footer', $data);
     }
 }//end controller
