@@ -5,8 +5,12 @@
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position: fixed; width: 100%;">
 
+                <!-- As a heading -->
+                <nav class="navbar">
+                    <span class="navbar-brand mb-0 h1" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 2rem; font-weight: bold;"><?= $title; ?></span>
+                </nav>
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
@@ -16,14 +20,23 @@
                 <ul class="navbar-nav ml-auto ">
 
                     <li class="nav-item">
-                        <a class="nav-link text-dark text-gray-600" href="<?= base_url('job/progress/') . $pekerjaan['id']; ?>">Job Plan</a>
+                        <a class="nav-link text-dark text-gray-600 <?php if ($title == "WORK PLAN") {
+                                                                        echo "d-none";
+                                                                    } ?>" href="<?= base_url('job/progress/') . $pekerjaan['id']; ?>">Job Plan</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark text-gray-600" href="#">Update Progress</a>
+                        <a class="nav-link text-dark text-gray-600 <?php if ($title == "UPDATE PROGRESS") {
+                                                                        echo "d-none";
+                                                                    } ?>" href="<?= base_url('job/update_progress/') . $pekerjaan['id']; ?>">Update Progress</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark text-gray-600" href="#">Chart</a>
+                        <a class="nav-link text-dark text-gray-600 <?php if ($title == "CHART") {
+                                                                        echo "d-none";
+                                                                    } ?>" href="#">Chart</a>
                     </li>
+
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
