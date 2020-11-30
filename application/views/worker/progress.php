@@ -11,8 +11,8 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
 
 ?>
 <div class="container">
-    <table class="table table-bordered table-responsive table-sm" style="font-size: 8px;">
-        <tr>
+    <table class="table table-bordered table-responsive table-sm table-secondary" style="font-size: 9px;">
+        <tr class="table-primary">
             <th>Pekerjaan Utama</th>
             <th>Uraian Pekerjaan</th>
             <th>Durasi</th>
@@ -23,14 +23,14 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
         </tr>
         <?php foreach ($progress as $p) : ?>
             <tr>
-                <td>
-                    <?php $pu = $this->db->get_where('pekerjaan_' . $pekerjaan['id'], ['id' => $p['id'] - 1])->row_array();
-                    if ($pu['pekerjaan_utama'] == $p['pekerjaan_utama']) {
-                        echo "";
-                    } else {
-                        echo $p['pekerjaan_utama'];
-                    }
-                    ?>
+                <td><b>
+                        <?php $pu = $this->db->get_where('pekerjaan_' . $pekerjaan['id'], ['id' => $p['id'] - 1])->row_array();
+                        if ($pu['pekerjaan_utama'] == $p['pekerjaan_utama']) {
+                            echo "";
+                        } else {
+                            echo $p['pekerjaan_utama'];
+                        }
+                        ?></b>
                     <!-- <?= $p['pekerjaan_utama']; ?> -->
                 </td>
                 <td><?= $p['uraian_pekerjaan']; ?></td>
@@ -42,7 +42,5 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
             </tr>
         <?php endforeach; ?>
     </table>
-    <?php
-    var_dump($progress);
-    ?>
+
 </div>
