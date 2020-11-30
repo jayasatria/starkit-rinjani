@@ -22,7 +22,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark text-gray-600 <?php if ($title == "WORK PLAN") {
                                                                         echo "d-none";
-                                                                    } ?>" href="<?= base_url('job/progress/') . $pekerjaan['id']; ?>">Job Plan</a>
+                                                                    } ?>" href="<?= base_url('job/progress/') . $pekerjaan['id']; ?>">Work Plan</a>
                     </li>
 
                     <li class="nav-item">
