@@ -8,7 +8,7 @@ $tgl2 = new DateTime($pekerjaan['tgl_selesai']);
 
 $durasi = $tgl2->diff($tgl1)->days + 1;
 
-// $tgl2->diff($tgl1)->days + 1;
+
 ?>
 <div class="container">
     <table class="table table-bordered table-responsive table-sm" style="font-size: 8px;">
@@ -24,11 +24,13 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
         <?php foreach ($progress as $p) : ?>
             <tr>
                 <td>
-                    <?php if ($p['pekerjaan_utama'] . $p['id'] == $p['pekerjaan_utama']) {
+                    <?php $pu = $this->db->get_where('pekerjaan_' . $pekerjaan['id'], ['id' => $p['id'] - 1])->row_array();
+                    if ($pu['pekerjaan_utama'] == $p['pekerjaan_utama']) {
                         echo "";
                     } else {
                         echo $p['pekerjaan_utama'];
-                    } ?>
+                    }
+                    ?>
                     <!-- <?= $p['pekerjaan_utama']; ?> -->
                 </td>
                 <td><?= $p['uraian_pekerjaan']; ?></td>
