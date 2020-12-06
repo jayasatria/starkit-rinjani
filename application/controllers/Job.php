@@ -397,6 +397,23 @@ class Job extends CI_Controller
         // $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar_worker', $data);
         $this->load->view('worker/update_progress', $data);
+        // $this->load->view('template/footer', $data);
+    }
+    public function u_progress($id)
+    {
+
+        $data = $this->db->get('pekerjaan_' . $id)->result_array();
+        echo json_encode($data);
+    }
+    public function update_action($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'UPDATE PROGRESS';
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('worker/update_action', $data);
         $this->load->view('template/footer', $data);
     }
 }//end controller
