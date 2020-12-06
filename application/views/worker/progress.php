@@ -26,6 +26,7 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
         <tbody>
             <?php foreach ($progress as $p) : ?>
 
+
                 <tr>
                     <td><b>
                             <?php $pu = $this->db->get_where('pekerjaan_' . $pekerjaan['id'], ['id' => $p['id'] - 1])->row_array();
@@ -44,11 +45,40 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
                         <td><?= $p['hari_' . $i]; ?></td>
                     <?php } ?>
                 </tr>
+
                 <tr>
                     <td></td>
-                    <td><a href="#" class="badge badge-primary" data-toggle="modal" data-target="#progressModal<?= $p['id']; ?>">Action</a></td>
+                    <td colspan="3"><a href="#" class="badge badge-primary" data-toggle="modal" data-target="#progressModal<?= $p['id']; ?>">Action</a></td>
+                    <?php for ($i = 1; $i <= $durasi; $i++) { ?>
+                        <td colspan="">
+                            <p <?php if ($p['hari_' . $i . '_a'] == $p['hari_' . $i]) {
+                                    echo 'style="color:green;"';
+                                } else {
+                                    echo 'style="color:red;"';
+                                } ?> name="">
+                                <?= $p['hari_' . $i . '_a']; ?></p>
+                        </td>
+                    <?php } ?>
                 </tr>
+
             <?php endforeach; ?>
+            <tr>
+                <td colspan="3">Total Plan</td>
+                <td><?php
+                    foreach ($progress as $pr) :
+                        echo array_sum($pr['bobot']);
+                    endforeach;
+                    ?></td>
+                <?php for ($i = 1; $i <= $durasi; $i++) { ?>
+                    <td><?php
+                        $this->db->select_sum('hari_' . $i);
+                        $this->db->from('pekerjaan_' . $pekerjaan['id'])->get();
+                        // echo $total;
+                        ?>
+                    </td>
+                <?php } ?>
+            </tr>
+
         </tbody>
     </table>
 
@@ -77,10 +107,11 @@ $durasi = $tgl2->diff($tgl1)->days + 1;
                         </select>
                         <label for="bobot" class="form-control mt-2">Bobot pekerjaan</label>
                         <input type="text" class="form-control" name="bobot" id="bobot">
+                        <input type="hidden" value="<?= $pekerjaan['id']; ?>" name="id_pekerjaan">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="Submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
